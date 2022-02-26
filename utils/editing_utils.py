@@ -1,14 +1,4 @@
-import torch
-from configs.paths_config import edit_paths
-
-
-def edit_latent(latent, direction, factor):
-    direction = {
-        'age': torch.load(edit_paths['age']).cuda(),
-        'smile': torch.load(edit_paths['smile']).cuda(),
-        'pose': torch.load(edit_paths['pose']).cuda()
-    }[direction]
-    
+def edit_latent(latent, direction, factor):   
     latent += factor * direction    
     return latent
     

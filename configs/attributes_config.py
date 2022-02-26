@@ -1,7 +1,11 @@
-# Wu et al., "Stylespace Analysis: Disentangled Controls For StyleGAN Image Generation", CVPR, 2021
-# https://arxiv.org/pdf/2011.12799.pdf
+import torch
+from configs.paths_config import edit_paths
+
 
 edit_attributes = {
+    # Wu et al., "Stylespace Analysis: Disentangled Controls For StyleGAN Image Generation", CVPR, 2021.
+    # https://arxiv.org/pdf/2011.12799.pdf  
+    # https://github.com/xrenaa/StyleSpace-pytorch  
     "hair": {
         "level": "style",
         "index": (6, 364)
@@ -34,12 +38,15 @@ edit_attributes = {
         "level": "style",
         "index": (9, 6)
     },   
+    # Shen et al., "Interpreting the Latent Space of GANs for Semantic Face Editing", CVPR, 2020.
+    # https://arxiv.org/pdf/1907.10786.pdf
+    # https://github.com/genforce/interfacegan
     "pose": {
         "level": "latent",
-        "direction": "pose"
+        "direction": torch.load(edit_paths['pose']).cuda()
     },
     "age": {
         "level": "latent",
-        "direction": "age"
+        "direction": torch.load(edit_paths['age']).cuda()
     },
 }
