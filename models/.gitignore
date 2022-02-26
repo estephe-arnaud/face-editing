@@ -129,6 +129,6 @@ dmypy.json
 .pyre/
 
 # IO
-io
-pretrained_models/
-.old/
+__pycache__
+pretrained_models
+output
