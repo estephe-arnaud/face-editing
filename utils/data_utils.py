@@ -4,6 +4,8 @@ import PIL
 import imageio
 import cv2
 from imutils.video import count_frames
+import torch
+from utils.common import tensor2im
 
 
 IMG_EXTENSIONS = [
@@ -89,3 +91,13 @@ def exif_transpose(image):
     except:
         pass
     return image
+
+
+def generate_faces(generator, n_faces):
+    images = []
+    for _ in range(n_faces):
+        z = torch.randn(1, 512).cuda()
+        x, _ = generator([z])
+        image = tensor2im(x[0])
+        images.append(image)
+    return images

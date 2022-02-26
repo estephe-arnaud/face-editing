@@ -4,27 +4,42 @@ import cv2
 from PIL import Image
 
 
-def interpolate_latents(latent1, latent2, ratio):
-    return latent1 + ratio * (latent2 - latent1)
+def interpolate_latents(latent_A, latent_B, ratio):
+    return latent_A + ratio * (latent_B - latent_A)
 
 
-def interpolate_styles(style1, style2, ratio):
-    if style1 is None or style2 is None:
+def interpolate_styles(style_A, style_B, ratio):
+    if style_A is None or style_B is None:
         return
     style = []
-    for s1, s2 in zip(style1, style2):
-        style.append(s1 + ratio * (s2 - s1))
+    for s_A, s_B in zip(style_A, style_B):
+        style.append(s_A + ratio * (s_B - s_A))
     return style
     
     
-def interpolate_weights_deltas(weights_deltas1, weights_deltas2, ratio):
+def interpolate_weights_deltas(weights_deltas_A, weights_deltas_B, ratio):
     weights_deltas = []
-    for dw1, dw2 in zip(weights_deltas1, weights_deltas2):
-        if dw1 is None or dw2 is None:
+    for dw_A, dw_B in zip(weights_deltas_A, weights_deltas_B):
+        if dw_A is None or dw_B is None:
             weights_deltas.append(None)
         else:    
-            weights_deltas.append(dw1 + ratio * (dw2 - dw1))
+            weights_deltas.append(dw_A + ratio * (dw_B - dw_A))
     return weights_deltas
+
+
+def interpolation(p_A, p_B, n_frames):
+    pts = []
+    ratios = np.linspace(0, 1, n_frames).tolist()
+
+    latent_A, weights_deltas_A = p_A["latent"], p_A["weights_deltas"]
+    latent_B, weights_deltas_B = p_B["latent"], p_B["weights_deltas"]
+    
+    for ratio in ratios:
+        latent = interpolate_latents(latent_A, latent_B, ratio)
+        weights_deltas = interpolate_weights_deltas(weights_deltas_A, weights_deltas_B, ratio)
+        pts.append({"latent": latent, "weights_deltas": weights_deltas})
+        
+    return pts
 
 
 # In what follows: https://github.com/Azmarie/Face-Morphing
