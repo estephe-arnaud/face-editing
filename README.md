@@ -3,10 +3,10 @@
 <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" height=22.5></a>  
 
 ## Morphing <a href="https://colab.research.google.com/github/estephe-arnaud/face-editing/blob/main/notebooks/morphing.ipynb"><img src="https://colab.research.google.com/assets/colab-badge.svg" height=20></a>
-![plot](./docs/morphing_300x300.gif)
+![plot](./docs/morphing_256x256.gif)
 
 ## Editing <a href="https://colab.research.google.com/github/estephe-arnaud/face-editing/blob/main/notebooks/editing.ipynb"><img src="https://colab.research.google.com/assets/colab-badge.svg" height=20></a>
-![plot](./docs/editing_300x300.gif)
+![plot](./docs/editing_256x256.gif)
 
 ## Contact ##
 If you have any questions or suggestions feel free to contact me at <estephe.arnaud@univ-lille.fr>.
